@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자판기 게임</title>
+  <style>
+    .button {
+      padding: 10px 20px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>자판기 게임</h1>
+  <p>음료를 선택하세요:</p>
+  <button class="button" onclick="selectDrink('콜라', 1000)">콜라<br>1000원</button>
+  <button class="button" onclick="selectDrink('사이다', 1000)">사이다<br>1000원</button>
+  <button class="button" onclick="selectDrink('오렌지 주스', 1000)">오렌지 주스<br>1000원</button>
+  <button class="button" onclick="selectDrink('바나나 우유', 1000)">바나나 우유<br>1000원</button>
+  <button class="button" onclick="selectDrink('커피', 1000)">커피<br>1000원</button>
+  <button class="button" onclick="selectDrink('아이스 커피', 1000)">아이스 커피<br>1000원</button>
+  <button class="button" onclick="selectDrink('포도 주스', 1000)">포도 주스<br>1000원</button>
+  <button class="button" onclick="selectDrink('사과 주스', 1000)">사과 주스<br>1000원</button>
+  <button class="button" onclick="selectDrink('코코아', 1000)">코코아<br>1000원</button>
+  <p>선택된 상품: <span id="selectedItem"></span></p>
+  <p>총 금액: <span id="totalAmount">0</span>원</p>
+  <button class="button" onclick="pay()">결제하기</button>
+  <button class="button" onclick="goHome()">홈으로 돌아가기</button>
+  <script>
+    let selectedProducts = {};
+
+    function selectDrink(drink, price) {
+      if (selectedProducts[drink]) {
+        selectedProducts[drink].quantity++;
+        selectedProducts[drink].totalPrice = selectedProducts[drink].quantity * price;
+      } else {
+        selectedProducts[drink] = {quantity: 1, totalPrice: price};
+      }
+      updateSelectedItems();
+      updateTotalAmount();
+    }
+
+    function updateSelectedItems() {
+      let items = [];
+      for (const [drink, details] of Object.entries(selectedProducts)) {
+        items.push(details.quantity + "개 " + drink + " (" + details.totalPrice + "원)" + "<button onclick=\"cancelOrder('" + drink + "')\">취소</button>");
+      }
+      document.getElementById('selectedItem').innerHTML = items.join("<br>");
+    }
+
+    function updateTotalAmount() {
+      let total = 0;
+      for (const [drink, details] of Object.entries(selectedProducts)) {
+        total += details.totalPrice;
+      }
+      document.getElementById('totalAmount').innerText = total;
+    }
+
+    function cancelOrder(drink) {
+      if (selectedProducts[drink].quantity > 1) {
+        selectedProducts[drink].quantity--;
+        selectedProducts[drink].totalPrice -= selectedProducts[drink].totalPrice / (selectedProducts[drink].quantity + 1);
+      } else {
+        delete selectedProducts[drink];
+      }
+      updateSelectedItems();
+      updateTotalAmount();
+    }
+
+    function pay() {
+      if (Object.keys(selectedProducts).length > 0) {
+        let items = [];
+        for (const [drink, details] of Object.entries(selectedProducts)) {
+          items.push(details.quantity + "개 " + drink + " (" + details.totalPrice + "원)");
+        }
+        alert(items.join(", ") + " 선택되었습니다. 총 " + document.getElementById('totalAmount').innerText + " 결제가 완료되었습니다. 감사합니다!");
+      } else {
+        alert("음료를 선택해주세요.");
+      }
+    }
+
+
+  </script>
+</body>
+<ul>
+  <li><a href="index.html">home</a></li>
+</ul>
+
+</html>

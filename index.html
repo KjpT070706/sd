@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TTT</title>
+  <style>
+    h1 {
+      text-align: center;
+      /* 제목을 중앙 정렬 */
+      font-size: 24px;
+      /* 원하는 크기로 폰트 사이즈 조절 */
+      margin-bottom: 12px;
+      /* 제목과 내용 사이의 여백 */
+      position: relative;
+      /* 상대 위치 설정 */
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      /* 밑줄 위치 조절 */
+      width: 100%;
+      height: 2px;
+      /* 밑줄 두께 */
+      background-color: black;
+      /* 밑줄 색상 */
+    }
+
+    .circle-container {
+      position: absolute;
+      right: 128px;
+      /* 오른쪽 여백 설정 */
+      top: 50px;
+      /* 위에서 50px 떨어진 곳에 위치 */
+      display: flex;
+      /* 플렉스 레이아웃 사용 */
+      flex-direction: column;
+      /* 아이템을 세로로 배치 */
+      align-items: flex-start;
+      /* 왼쪽 정렬 */
+    }
+
+    .circle {
+      width: 324px;
+      /* 원의 가로 크기 */
+      height: 324px;
+      /* 원의 세로 크기 */
+      border: 2px solid black;
+      /* 원의 테두리 설정 */
+      border-radius: 50%;
+      /* 원 모양으로 만들기 */
+      background-color: white;
+      /* 원의 배경 색상 */
+      margin-bottom: 50px;
+      /* 원 사이의 간격 조절 */
+      cursor: pointer;
+      /* 커서 모양을 손가락으로 변경하여 클릭 가능함을 나타냄 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    body {
+      background-color: rgb(215, 45, 74);
+      /* 웹사이트 전체 배경 색상 설정 */
+      color: white;
+      /* 텍스트 색상을 흰색으로 설정 */
+      position: relative;
+      /* 상대 위치 설정 */
+    }
+  </style>
+</head>
+
+<body>
+  <h1>지한이의 자판기</h1>
+  <div class="circle-container">
+    <div class="circle" onclick="location.href='자판기 1.html';" style="cursor:pointer;">원 1</div>
+    <div class="circle" onclick="location.href='자판기 2.html';" style="cursor:pointer;">원 2</div>
+    <div class="circle" onclick="location.href='자판기 3.html';" style="cursor:pointer;">원 3</div>
+  </div>
+</body>
+
+</html>
